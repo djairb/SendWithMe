@@ -3,26 +3,73 @@ package com.example.emano.sendwithme;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.InputMismatchException;
 
 public class CadastroUsuario extends AppCompatActivity {
 
+    private EditText nome;
+    private EditText email;
+    private EditText cpf;
+    private EditText senha;
+    private Button botaoCadastrar;
+    private Button botaoCancelar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_usuario);
+        setView();
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validaCadastro()){
+                    //validaCPF(cpf.getText().toString()) &&
+                    FireBaseClass fireBaseClass = new FireBaseClass();
+                    Usuario usuario = montarUsuario();
+                    fireBaseClass.criarLogin(usuario.getEmail(), usuario.getSenha(), usuario);
+
+                }else{
+                    Toast.makeText(CadastroUsuario.this, "Algum campo informado esta incorreto.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
-    EditText nome = (EditText) findViewById(R.id.edtNome);
-    EditText email = (EditText) findViewById(R.id.edtEmail);
-    EditText cpf = (EditText) findViewById(R.id.edtCPF);
-    EditText senha = (EditText) findViewById(R.id.edtSenha);
 
-    Usuario usuario = new Usuario(nome.toString(),email.toString(),cpf.toString(),senha.toString());
+    public Usuario montarUsuario(){
+        Usuario usuario = new Usuario();
+        usuario.setNome(nome.getText().toString());
+        usuario.setCpf(cpf.getText().toString());
+        usuario.setEmail(email.getText().toString());
+        usuario.setSenha(senha.getText().toString());
+
+        return usuario;
+    }
+
+
+
+    public void setView(){
+
+        nome = findViewById(R.id.edtNome);
+        email = findViewById(R.id.edtEmail);
+        cpf = findViewById(R.id.edtCPF);
+        senha = findViewById(R.id.edtSenha);
+
+        botaoCadastrar = findViewById(R.id.btnCadastro);
+        botaoCancelar = findViewById(R.id.btnCancelar);
+
+    }
+
+
+
 
     public boolean validaCPF(String cpf){
 
@@ -79,10 +126,10 @@ public class CadastroUsuario extends AppCompatActivity {
 
     public boolean validaCadastro(){
 
-        EditText nome = (EditText) findViewById(R.id.edtNome);
+        /*EditText nome = (EditText) findViewById(R.id.edtNome);
         EditText email = (EditText) findViewById(R.id.edtEmail);
         EditText cpf = (EditText) findViewById(R.id.edtCPF);
-        EditText senha = (EditText) findViewById(R.id.edtSenha);
+        EditText senha = (EditText) findViewById(R.id.edtSenha);*/
 
         boolean validade = true;
 

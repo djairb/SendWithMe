@@ -2,12 +2,16 @@ package com.example.emano.sendwithme;
 
 public class Usuario {
 
-    String nome;
-    String email;
-    String cpf;
-    String senha;
+    private String id;
+    private String nome;
+    private String email;
+    private String cpf;
+    private String senha;
 
-    public Usuario(String nome, String email, String cpf, String senha) {
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String sobrenome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -45,4 +49,13 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }
