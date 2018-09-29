@@ -7,6 +7,13 @@ public class Usuario {
     String cpf;
     String senha;
 
+    public Usuario(String nome, String email, String cpf, String senha) {
+        this.nome = nome;
+        this.email = email;
+        this.cpf = cpf;
+        this.senha = senha;
+    }
+
     public String getNome() {
         return nome;
     }
