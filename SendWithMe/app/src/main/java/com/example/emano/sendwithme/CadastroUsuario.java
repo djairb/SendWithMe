@@ -1,12 +1,22 @@
 package com.example.emano.sendwithme;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.InputMismatchException;
 
@@ -30,13 +40,20 @@ public class CadastroUsuario extends AppCompatActivity {
             public void onClick(View v) {
                 if(validaCadastro()){
                     //validaCPF(cpf.getText().toString()) &&
-                    FireBaseClass fireBaseClass = new FireBaseClass();
+                    //FireBaseClass fireBaseClass = new FireBaseClass();
                     Usuario usuario = montarUsuario();
-                    fireBaseClass.criarLogin(usuario.getEmail(), usuario.getSenha(), usuario);
+                    cadastrarUsuario(usuario.getEmail(), usuario.getSenha(), usuario);
 
                 }else{
                     Toast.makeText(CadastroUsuario.this, "Algum campo informado esta incorreto.", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        botaoCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -68,6 +85,38 @@ public class CadastroUsuario extends AppCompatActivity {
 
     }
 
+    public void inserirUsuarioNoBanco(Usuario usuario){
+        DatabaseReference referenciaNoUsuarios = FirebaseDatabase.getInstance().getReference().child("Usuarios");
+        referenciaNoUsuarios.child(usuario.getId()).setValue(usuario);
+        //cadastrarUsuario(usuario.getEmail(), usuario.getSenha());
+    }
+
+    public void cadastrarUsuario(String email, String senha, final Usuario usuario){
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.createUserWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful()){
+                            Log.i("Cadastro","Deu certo!");
+                            FirebaseUser firebaseUser = task.getResult().getUser();
+                            usuario.setId(firebaseUser.getUid());
+                            inserirUsuarioNoBanco(usuario);
+                            Toast.makeText(CadastroUsuario.this, "Usuário cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                            finish();
+
+
+                        }else{
+                            Log.i("Cadastro","Deu errado!");
+                            Toast.makeText(CadastroUsuario.this, "Falha ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }
+                });
+
+    }
 
 
 
