@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".CadastroUsuario" />
-        <activity android:name=".Home"></activity>
+        <activity android:name=".Home" />
+        <activity
+            android:name=".DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
