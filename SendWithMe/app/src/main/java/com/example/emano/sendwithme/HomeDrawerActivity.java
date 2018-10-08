@@ -83,13 +83,6 @@ public class HomeDrawerActivity extends AppCompatActivity
 
             }
         });
-
-
-
-
-
-
-
         ///
 
     }
@@ -138,13 +131,22 @@ public class HomeDrawerActivity extends AppCompatActivity
             startActivity(new Intent(HomeDrawerActivity.this, Home.class));
 
         } else if (id == R.id.nav_editPerfil) {
+            //editarperfilactivity
 
         } else if (id == R.id.nav_sair) {
+            logout();
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout(){
+        //Sessao.instance.reset();
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(HomeDrawerActivity.this, LoginActivity.class));
+        HomeDrawerActivity.this.finish();
     }
 }
