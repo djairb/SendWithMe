@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.InputMismatchException;
 
-public class CadastroUsuario extends AppCompatActivity {
+public class CadastroActivity extends AppCompatActivity {
 
     private EditText nome;
     private EditText email;
@@ -33,7 +33,7 @@ public class CadastroUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_usuario);
+        setContentView(R.layout.activity_cadastro);
         setView();
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class CadastroUsuario extends AppCompatActivity {
                     cadastrarUsuario(usuario.getEmail(), usuario.getSenha(), usuario);
 
                 }else{
-                    Toast.makeText(CadastroUsuario.this, "Algum campo informado esta incorreto.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CadastroActivity.this, "Algum campo informado esta incorreto.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -103,13 +103,13 @@ public class CadastroUsuario extends AppCompatActivity {
                             FirebaseUser firebaseUser = task.getResult().getUser();
                             usuario.setId(firebaseUser.getUid());
                             inserirUsuarioNoBanco(usuario);
-                            Toast.makeText(CadastroUsuario.this, "Usuário cadastrado com sucesso", Toast.LENGTH_LONG).show();
+                            Toast.makeText(CadastroActivity.this, "Usuário cadastrado com sucesso", Toast.LENGTH_LONG).show();
                             finish();
 
 
                         }else{
                             Log.i("Cadastro","Deu errado!");
-                            Toast.makeText(CadastroUsuario.this, "Falha ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CadastroActivity.this, "Falha ao cadastrar usuário", Toast.LENGTH_SHORT).show();
 
                         }
 

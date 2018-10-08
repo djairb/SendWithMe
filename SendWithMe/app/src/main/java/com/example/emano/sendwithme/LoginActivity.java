@@ -14,23 +14,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private Button botaoCadastrarHome;
     private Button botaoLogar;
     private EditText email;
     private EditText senha;
-    //botao q vai pra tela de cadastro
+    private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
+        mAuth = FirebaseAuth.getInstance();
         setView();
         botaoCadastrarHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,CadastroUsuario.class));
+                startActivity(new Intent(LoginActivity.this,CadastroActivity.class));
 
             }
         });
@@ -43,6 +46,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null){
+            startActivity(new Intent(LoginActivity.this,HomeDrawerActivity.class));
+        }
+        //updateUI(currentUser);
 
     }
 
@@ -64,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {//sucesso ao logar
                             Log.i("Login","Deu certo!");
-                            startActivity(new Intent(MainActivity.this, DrawerActivity.class));
+                            startActivity(new Intent(LoginActivity.this, HomeDrawerActivity.class));
                         }else{
-                            Toast.makeText(MainActivity.this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
 
                         }
                     }
