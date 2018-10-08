@@ -79,7 +79,6 @@ public class CadastroActivity extends AppCompatActivity {
         email = findViewById(R.id.edtEmail);
         cpf = findViewById(R.id.edtCPF);
         senha = findViewById(R.id.edtSenha);
-
         botaoCadastrar = findViewById(R.id.btnCadastro);
         botaoCancelar = findViewById(R.id.btnCancelar);
 
@@ -88,7 +87,6 @@ public class CadastroActivity extends AppCompatActivity {
     public void inserirUsuarioNoBanco(Usuario usuario){
         DatabaseReference referenciaNoUsuarios = FirebaseDatabase.getInstance().getReference().child("Usuarios");
         referenciaNoUsuarios.child(usuario.getId()).setValue(usuario);
-        //cadastrarUsuario(usuario.getEmail(), usuario.getSenha());
     }
 
     public void cadastrarUsuario(String email, String senha, final Usuario usuario){
@@ -174,11 +172,6 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public boolean validaCadastro(){
-
-        /*EditText nome = (EditText) findViewById(R.id.edtNome);
-        EditText email = (EditText) findViewById(R.id.edtEmail);
-        EditText cpf = (EditText) findViewById(R.id.edtCPF);
-        EditText senha = (EditText) findViewById(R.id.edtSenha);*/
 
         boolean validade = true;
 

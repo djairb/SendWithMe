@@ -28,10 +28,13 @@ public class HomeDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private TextView textoEntrada;
+    private TextView nomeUsuario;
+    private TextView emailUsuario;
     private FirebaseAuth mAuth;
     private DatabaseReference dataBaseReferencia = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference usuarioReferencia = dataBaseReferencia.child("Usuarios");
     private DatabaseReference usuarioReferencia2;
+    private View hView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class HomeDrawerActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        hView = navigationView.getHeaderView(0);
 
         /// classe para nome
         /*
@@ -67,6 +71,9 @@ public class HomeDrawerActivity extends AppCompatActivity
         }
         * */
         textoEntrada = findViewById(R.id.textoEntradaId2);
+        nomeUsuario = hView.findViewById(R.id.nomeUsuarioDrawerId);
+        //nomePerfil = hView.findViewById(R.id.nomePerfilHomeId);
+        emailUsuario = hView.findViewById(R.id.emailUsuarioDrawerId);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         usuarioReferencia2 = usuarioReferencia.child(uid);
@@ -74,7 +81,11 @@ public class HomeDrawerActivity extends AppCompatActivity
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                textoEntrada.setText(usuario.getNome());
+                //textoEntrada.setText(usuario.getNome());
+                String nome = usuario.getNome();
+                nomeUsuario.setText(nome);
+                emailUsuario.setText(usuario.getEmail());
+                textoEntrada.setText("TELA MAPA HOME");
 
             }
 
