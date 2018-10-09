@@ -70,7 +70,7 @@ public class HomeDrawerActivity extends AppCompatActivity
             String uid = user.getUid();
         }
         * */
-        textoEntrada = findViewById(R.id.textoEntradaId2);
+        //textoEntrada = findViewById(R.id.textoEntradaId2);
         nomeUsuario = hView.findViewById(R.id.nomeUsuarioDrawerId);
         //nomePerfil = hView.findViewById(R.id.nomePerfilHomeId);
         emailUsuario = hView.findViewById(R.id.emailUsuarioDrawerId);
@@ -85,7 +85,7 @@ public class HomeDrawerActivity extends AppCompatActivity
                 String nome = usuario.getNome();
                 nomeUsuario.setText(nome);
                 emailUsuario.setText(usuario.getEmail());
-                textoEntrada.setText("TELA MAPA HOME");
+                //textoEntrada.setText("TELA MAPA HOME");
 
             }
 
