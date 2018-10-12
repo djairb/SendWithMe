@@ -19,6 +19,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.InputMismatchException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText email;
     private EditText cpf;
     private EditText senha;
+    private EditText senhaConfirma;
     private Button botaoCadastrar;
     private Button botaoCancelar;
 
@@ -38,14 +41,12 @@ public class CadastroActivity extends AppCompatActivity {
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validaCadastro()){
+                if(validarCampos()){
                     //validaCPF(cpf.getText().toString()) &&
                     //FireBaseClass fireBaseClass = new FireBaseClass();
                     Usuario usuario = montarUsuario();
                     cadastrarUsuario(usuario.getEmail(), usuario.getSenha(), usuario);
 
-                }else{
-                    Toast.makeText(CadastroActivity.this, "Algum campo informado esta incorreto.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -79,6 +80,7 @@ public class CadastroActivity extends AppCompatActivity {
         email = findViewById(R.id.edtEmail);
         cpf = findViewById(R.id.edtCPF);
         senha = findViewById(R.id.edtSenha);
+        senhaConfirma = findViewById(R.id.edtSenhaCompara);
         botaoCadastrar = findViewById(R.id.btnCadastro);
         botaoCancelar = findViewById(R.id.btnCancelar);
 
@@ -106,8 +108,7 @@ public class CadastroActivity extends AppCompatActivity {
 
 
                         }else{
-                            Log.i("Cadastro","Deu errado!");
-                            Toast.makeText(CadastroActivity.this, "Falha ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CadastroActivity.this, "Falha ao cadastrar usuário. Verifique os dados informados e tente novamente", Toast.LENGTH_SHORT).show();
 
                         }
 
@@ -117,86 +118,94 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
 
-
-    public boolean validaCPF(String cpf){
-
-        if (cpf.equals("00000000000") ||
-                cpf.equals("11111111111") || cpf.equals("22222222222") || cpf.equals("33333333333") ||
-                cpf.equals("44444444444") || cpf.equals("55555555555") || cpf.equals("66666666666") ||
-                cpf.equals("77777777777") || cpf.equals("88888888888") || cpf.equals("99999999999") ||
-                (cpf.length() != 11)) {
-            return (false);
+    private boolean validarCampos() {
+        boolean erro = true;
+        if (validarCpf()) {
+            erro = false;
         }
-
-        char digito10, digito11;
-        int soma,i, r, num, peso;
-
-        try {
-
-            soma = 0;
-            peso = 10;
-
-            for (i=0; i<9; i++) {
-                num = (int)(cpf.charAt(i) - 48);
-                soma = soma + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (soma % 11);
-
-            if ((r == 10) || (r == 11))
-                digito10 = '0';
-            else digito10 = (char)(r + 48);
-
-            soma = 0;
-            peso = 11;
-
-            for(i=0; i<10; i++) {
-                num = (int)(cpf.charAt(i) - 48);
-                soma = soma + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (soma % 11);
-
-            if ((r == 10) || (r == 11))
-                digito11 = '0';
-            else digito11 = (char)(r + 48);
-
-            if ((digito10 == cpf.charAt(9)) && (digito11 == cpf.charAt(10)))
-                return(true);
-            else return(false);
-        } catch (InputMismatchException erro) {
-            return(false);
+        if (validarNome()) {
+            erro = false;
         }
+        if (validarEmail()) {
+            erro = false;
+        }
+        if (validarSenha()) {
+            erro = false;
+        }
+        return erro;
     }
 
-    public boolean validaCadastro(){
-
-        boolean validade = true;
-
-        if (nome.getText().equals(" ")) {
-            nome.setText("");
-        } else if (nome.getText().toString().equals("") ||nome.getText().toString() == null) {
-            Toast.makeText(getApplicationContext(), "Nome inválido", Toast.LENGTH_LONG).show();
-            validade = false;
-        } else if (cpf.getText().toString().length() != 11 || cpf.getText().toString().
-                contains("^[a-zA-ZÁÂÃÀÇÉÊÍÓÔÕÚÜáâãàçéêíóôõúü]*$")){
-            Toast.makeText(getApplicationContext(), "CPF inválido", Toast.LENGTH_LONG).show();
-            validade = false;
-        } else if (!Patterns.EMAIL_ADDRESS.matcher((CharSequence) email.getText().toString()).matches()){
-            Toast.makeText(getApplicationContext(), "Email inválido", Toast.LENGTH_LONG).show();
-            validade = false;
-        } else if(senha.getText().length()<8){
-            Toast.makeText(getApplicationContext(),
-                    "Senha muito curta(Tamanho mínimo: 8 caracteres)",
-                     Toast.LENGTH_LONG).show();
-            validade=false;
+    private boolean validarCpf(){
+        boolean erro = false;
+        String cpfString =  cpf.getText().toString().trim();
+        if(cpfString.isEmpty()){
+            erro = true;
+            cpf.setError("Campo em branco");
+        }else if(cpfString.length() != 11){
+            erro = true;
+            cpf.setError("Cpf não tem 11 digitos");
+        }else if(!cpfString.matches("[0-9]+")){
+            erro = true;
+            cpf.setError("Cpf não contem apenas numeros");
         }
-
-
-        return validade;
-
+        return erro;
     }
+
+    private boolean validarNome(){
+        boolean erro = false;
+        String nomeString = nome.getText().toString().trim();
+        if(nomeString.isEmpty()){
+            erro = true;
+            nome.setError("Campo em branco");
+        }
+        return erro;
+    }
+
+
+    private boolean validarEmail(){
+        boolean erro = false;
+        String emailString = email.getText().toString().trim();
+        if(emailString.isEmpty()){
+            erro = true;
+            email.setError("Campo em branco");
+        }else{
+            String excecoes = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+            Pattern pattern = Pattern.compile(excecoes);
+            Matcher matcher = pattern.matcher(emailString);
+
+            if(!matcher.matches()){
+                erro = true;
+                email.setError("Email informado inválido");
+            }
+        }
+        return erro;
+    }
+
+    private boolean validarSenha(){
+        boolean erro = false;
+        String senhaString = senha.getText().toString();
+        String confirmarSenhaString = senhaConfirma.getText().toString();
+        if(senhaString.isEmpty() && confirmarSenhaString.isEmpty()){
+            erro = true;
+            senha.setError("Campo em branco");
+            senhaConfirma.setError("Campo em branco");
+        } else if(senhaString.isEmpty()){
+            erro = true;
+            senha.setError("Campo em branco");
+        }else if(confirmarSenhaString.isEmpty()){
+        erro = true;
+        senhaConfirma.setError("Campo em branco");
+        }else if(senhaString.length() < 6){
+            erro = true;
+            senha.setError("A senha deve conter pelo menos 6 caracteres");
+        }else if(!senhaString.equals(confirmarSenhaString)){
+            erro = true;
+            senha.setError("As senhas devem ser iguais");
+            senhaConfirma.setError("As senhas devem ser iguais");
+        }
+        return erro;
+    }
+
+
 
 }

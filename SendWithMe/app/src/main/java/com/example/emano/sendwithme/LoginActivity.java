@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                fazerLogin(email.getText().toString(), senha.getText().toString());
+                fazerLogin(email.getText().toString().trim(), senha.getText().toString().trim());
 
             }
         });
@@ -69,22 +69,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void fazerLogin(String email, String senha){
+        if (!email.isEmpty()&&!senha.isEmpty()){
+            FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+            firebaseAuth.signInWithEmailAndPassword(email, senha)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {//sucesso ao logar
+                                Log.i("Login","Deu certo!");
+                                startActivity(new Intent(LoginActivity.this, HomeDrawerActivity.class));
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
 
-        firebaseAuth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {//sucesso ao logar
-                            Log.i("Login","Deu certo!");
-                            startActivity(new Intent(LoginActivity.this, HomeDrawerActivity.class));
-                        }else{
-                            Toast.makeText(LoginActivity.this, "Erro ao fazer login", Toast.LENGTH_SHORT).show();
-
+                            }
                         }
-                    }
-                });
+                    });
+
+        }else{
+            Toast.makeText(LoginActivity.this,"Campos inválidos", Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
 
