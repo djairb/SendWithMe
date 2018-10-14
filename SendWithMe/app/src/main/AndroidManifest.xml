@@ -24,7 +24,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".CadastroActivity" />
-        <activity android:name=".Home" />
+        <activity android:name=".PerfilActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".HomeDrawerActivity"
+                />
+
+        </activity>
+
+
         <activity
             android:name=".HomeDrawerActivity"
             android:label="@string/title_activity_drawer"

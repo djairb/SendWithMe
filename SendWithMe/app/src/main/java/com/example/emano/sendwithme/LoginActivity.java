@@ -63,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     public void setView(){
         botaoCadastrarHome = findViewById(R.id.botaoCadastrarHome);
         botaoLogar = findViewById(R.id.botaoEntrarId);
-        email = findViewById(R.id.emailId);
+        email = findViewById(R.id.emailPerfilId);
         senha = findViewById(R.id.senhaId);
 
     }

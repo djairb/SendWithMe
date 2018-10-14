@@ -3,8 +3,6 @@ package com.example.emano.sendwithme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -82,8 +80,7 @@ public class HomeDrawerActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario usuario = dataSnapshot.getValue(Usuario.class);
                 //textoEntrada.setText(usuario.getNome());
-                String nome = usuario.getNome();
-                nomeUsuario.setText(nome);
+                nomeUsuario.setText(usuario.getNome());
                 emailUsuario.setText(usuario.getEmail());
                 //textoEntrada.setText("TELA MAPA HOME");
 
@@ -120,7 +117,7 @@ public class HomeDrawerActivity extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the PerfilActivity/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -139,10 +136,10 @@ public class HomeDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            startActivity(new Intent(HomeDrawerActivity.this, Home.class));
 
-        } else if (id == R.id.nav_editPerfil) {
-            //editarperfilactivity
+
+        } else if (id == R.id.nav_perfil) {
+            startActivity(new Intent(HomeDrawerActivity.this, PerfilActivity.class));
 
         } else if (id == R.id.nav_sair) {
             logout();
