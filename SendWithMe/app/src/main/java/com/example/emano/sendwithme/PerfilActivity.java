@@ -1,5 +1,6 @@
 package com.example.emano.sendwithme;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +37,8 @@ public class PerfilActivity extends AppCompatActivity {
         botaoEditarPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PerfilActivity.this, "IR pra a tela de edicao", Toast.LENGTH_LONG).show();
+                //Toast.makeText(PerfilActivity.this, "IR pra a tela de edicao", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(PerfilActivity.this, EditarPerfilActivity.class));
             }
         });
 

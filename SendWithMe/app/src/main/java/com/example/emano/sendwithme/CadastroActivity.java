@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.InputMismatchException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -78,7 +76,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         nome = findViewById(R.id.edtNome);
         email = findViewById(R.id.edtEmail);
-        cpf = findViewById(R.id.edtCPF);
+        cpf = findViewById(R.id.edtCpf);
         senha = findViewById(R.id.edtSenha);
         senhaConfirma = findViewById(R.id.edtSenhaCompara);
         botaoCadastrar = findViewById(R.id.btnCadastro);
