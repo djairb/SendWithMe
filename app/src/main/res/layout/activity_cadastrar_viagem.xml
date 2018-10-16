@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/map4"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="381dp"
+        android:layout_height="501dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        map:layout_constraintBottom_toTopOf="@+id/btnSalvarViagem"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        tools:context=".CadastroViagem" />
+
+    <Button
+        android:id="@+id/btnBuscaRota"
+        android:layout_width="383dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="BuscarViagem"
+        android:text="Buscar"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSalvarViagem"
+        android:layout_width="397dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="salvarViagem"
+        android:text="Salvar"
+        map:layout_constraintBottom_toTopOf="@+id/btnBuscaRota"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editInicioViagem"
+        android:layout_width="364dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Início"
+        android:inputType="textPersonName"
+        map:layout_constraintBottom_toTopOf="@+id/editFimViagem"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.503"
+        map:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editFimViagem"
+        android:layout_width="371dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:hint="Fim"
+        android:inputType="textPersonName"
+        map:layout_constraintBottom_toTopOf="@+id/map4"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.478"
+        map:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
