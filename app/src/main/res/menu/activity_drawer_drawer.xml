@@ -14,6 +14,10 @@
             android:title="Perfil" />
 
         <item
+            android:id="@+id/nav_pedido"
+            android:title="Cadastrar Pedido" />
+
+        <item
             android:id="@+id/nav_viagem"
             android:title="Cadastrar Viagem" />
 

@@ -36,8 +36,9 @@ public class HomeDrawerActivity extends AppCompatActivity
     private DatabaseReference usuarioReferencia = dataBaseReferencia.child("Usuarios");
     private DatabaseReference usuarioReferencia2;
     private View hView;
-    private MapsActivity mapa = new MapsActivity();
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_drawer);
@@ -146,6 +147,14 @@ public class HomeDrawerActivity extends AppCompatActivity
         } else if (id == R.id.nav_sair) {
             logout();
 
+        }else if (id == R.id.nav_pedido){
+
+            startActivity(new Intent(HomeDrawerActivity.this, MapsActivity2.class));
+
+        }else if (id == R.id.nav_viagem){
+
+            startActivity(new Intent(HomeDrawerActivity.this, CadastroViagem.class));
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -158,31 +167,6 @@ public class HomeDrawerActivity extends AppCompatActivity
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(HomeDrawerActivity.this, LoginActivity.class));
         HomeDrawerActivity.this.finish();
-    }
-
-    public void irParaPedido(View view){
-
-        EditText  edt_pegaOr =(EditText)findViewById(R.id.edtOrigem);
-        EditText  edt_destino =(EditText)findViewById(R.id.edtDestino);
-        String origem= edt_pegaOr.getText().toString();
-        String destino= edt_destino.getText().toString();
-
-        Intent intent = new Intent(getApplicationContext(),MapsActivity2.class);
-        intent.putExtra("origem",origem);
-        intent.putExtra("destino",destino);
-        startActivity(intent);
-
-    }
-
-    public void buscarRota(View view){
-
-        EditText edt_loca = (EditText)findViewById(R.id.edtOrigem);
-        EditText edt_destino=(EditText)findViewById(R.id.edtDestino);
-        String origem = edt_loca.getText().toString();
-        String destino =edt_destino.getText().toString();
-
-        mapa.tracarRota("Recife", "Olinda");
-
     }
 
 }

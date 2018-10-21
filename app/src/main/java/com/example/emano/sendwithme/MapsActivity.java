@@ -55,17 +55,6 @@ import java.util.Map;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
-    private LatLng recife = new LatLng(-8.05428,  -34.8813);
-
-    public void setRecife(LatLng recife) {
-        this.recife = recife;
-    }
-
-    public GoogleMap getmMap() {
-        return mMap;
-    }
-
     private Marker posicaoAtual;
     private LatLng latLng;
 
@@ -77,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.content_drawer);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map2);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 
@@ -96,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = recife;
+        LatLng sydney = new LatLng(-8.05428,  -34.8813);
 
         CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(sydney).build();
 
@@ -411,7 +400,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    public void tracarRota(String origem, String destino){
+    /*public void buscarRota(View view){
+
+
+
+        EditText edt_loca = (EditText)findViewById(R.id.edtOrigem);
+        EditText edt_destino=(EditText)findViewById(R.id.edtDestino);
+        String origem = edt_loca.getText().toString();
+        String destino =edt_destino.getText().toString();
 
         List<Address>addressesList=null;
         List<Address>addressesList2=null;
@@ -445,7 +441,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //Recuperamos a URL passando as cordenadas de origem como sendo a cordenada que definimos
                 //para a nossa residência e as coordenadas de destino como sendo a do escritório da Google em SP.
-                String url = montarURLRotaMapa(latLng.latitude, latLng.longitude, latLng2.latitude, latLng2.longitude);
+               /* String url = montarURLRotaMapa(latLng.latitude, latLng.longitude, latLng2.latitude, latLng2.longitude);
                 //Criamos uma instância de nossa AsyncTask (para cada requisição deverá ser criada uma nova instância).
                 MinhaAsyncTask tarefa = new MinhaAsyncTask();
 
@@ -483,22 +479,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
     }
-
-    public void irParaPedido(View view){
-        EditText  edt_pegaLoc =(EditText)findViewById(R.id.edtOrigem);
+    */
+    /*public void fazerPedido(View view){
+       /* EditText  edt_pegaLoc =(EditText)findViewById(R.id.edtOrigem);
         EditText  edt_destino =(EditText)findViewById(R.id.edtDestino);
         String origem= edt_pegaLoc.getText().toString();
         String destino= edt_destino.getText().toString();
 
 
-        Intent intent = new Intent(getApplicationContext(),MapsActivity2.class);
-        intent.putExtra("origem",origem);
-        intent.putExtra("destino",destino);
+        Intent intent = new Intent(getApplicationContext(),Home.class);
+        //intent.putExtra("origem",origem);
+        //intent.putExtra("destino",destino);
         startActivity(intent);
 
 
 
-    }
+    }*/
 
     private class MinhaAsyncTask extends AsyncTask<String, Void, JSONObject> {
 

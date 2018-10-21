@@ -9,4 +9,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_cadastro_viagem">Cadastrar Viagem</string>
+    <string name="title_activity_cadastro_pedido_mapa">Map</string>
 </resources>

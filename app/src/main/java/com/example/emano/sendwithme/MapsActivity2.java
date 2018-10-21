@@ -99,7 +99,7 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
         // Add a marker in Sydney and move the camera
         LatLng sydney = recife;
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(sydney).build();
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(10).target(sydney).build();
 
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
@@ -483,21 +483,6 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
     }
 
 
-    public void fazerPedido(View view){
-        EditText  edt_pegaLoc =(EditText)findViewById(R.id.editOrigemPedido);
-        EditText  edt_destino =(EditText)findViewById(R.id.edtDestinoPedido);
-        String origem= edt_pegaLoc.getText().toString();
-        String destino= edt_destino.getText().toString();
-
-
-        Intent intent = new Intent(getApplicationContext(),ConfirmarPedidoActivity.class);
-        intent.putExtra("origem",origem);
-        intent.putExtra("destino",destino);
-        startActivity(intent);
-
-
-
-    }
 
     private class MinhaAsyncTask extends AsyncTask<String, Void, JSONObject> {
 
@@ -516,6 +501,20 @@ public class MapsActivity2 extends FragmentActivity implements OnMapReadyCallbac
                 pintarCaminho(resultadoRequisicao);
             }
         }
+
+    }
+
+    public void fazerPedido(View view){
+
+        EditText origem = (EditText) findViewById(R.id.editOrigemPedido);
+        EditText destino = (EditText) findViewById(R.id.edtDestinoPedido);
+        String origem1 = origem.getText().toString();
+        String destino1 = destino.getText().toString();
+
+        EditText titulo = (EditText) findViewById(R.id.editTítuloPedido);
+        EditText nome = (EditText) findViewById(R.id.editNomeItem);
+        String titulo1 = titulo.getText().toString();
+        String nome1 = nome.getText().toString();
 
     }
 

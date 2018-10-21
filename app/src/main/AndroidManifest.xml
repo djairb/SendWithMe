@@ -49,10 +49,9 @@
         <activity
             android:name=".MapsActivity2"
             android:label="@string/title_activity_maps2" />
-        <activity android:name=".ConfirmarPedidoActivity" />
         <activity
             android:name=".CadastroViagem"
-            android:label="@string/title_activity_cadastro_viagem"></activity>
+            android:label="@string/title_activity_cadastro_viagem" />
     </application>
 
 </manifest>
