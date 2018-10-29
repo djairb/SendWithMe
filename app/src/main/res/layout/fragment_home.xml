@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePackage.HomeFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/cidadeDigitadaId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="26dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Carpina"
+            app:layout_constraintBottom_toTopOf="@+id/cidadeDigitadaId2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/cidadeDigitadaId2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Tracunhaém"
+            app:layout_constraintBottom_toTopOf="@+id/botaoAchaCidadeId"
+            app:layout_constraintStart_toStartOf="@+id/cidadeDigitadaId"
+            app:layout_constraintTop_toBottomOf="@+id/cidadeDigitadaId" />
+
+        <Button
+            android:id="@+id/botaoAchaCidadeId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="21dp"
+            android:text="FIND ROUTE"
+            app:layout_constraintBottom_toTopOf="@+id/container2Id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cidadeDigitadaId2" />
+
+        <FrameLayout
+            android:id="@+id/container2Id"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/botaoAchaCidadeId">
+
+        </FrameLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

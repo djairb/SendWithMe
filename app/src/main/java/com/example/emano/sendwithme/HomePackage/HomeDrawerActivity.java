@@ -157,6 +157,8 @@ public class HomeDrawerActivity extends AppCompatActivity
 
             startActivity(new Intent(HomeDrawerActivity.this, CadastroViagem.class));
 
+        }else if(id == R.id.nav_home_default){
+            startActivity(new Intent(HomeDrawerActivity.this, BlankActivity.class));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
