@@ -20,21 +20,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".HomePackage.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".PerfilActivity">
+        <activity android:name=".UsuarioPackage.CadastroActivity" />
+        <activity android:name=".PerfilPackage.PerfilActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeDrawerActivity" />
+                android:value=".HomePackage.HomeDrawerActivity" />
         </activity>
         <activity
-            android:name=".HomeDrawerActivity"
+            android:name=".HomePackage.HomeDrawerActivity"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
@@ -49,12 +49,12 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".EditarPerfilActivity" />
+        <activity android:name=".PerfilPackage.EditarPerfilActivity" />
         <activity
-            android:name=".MapsActivity2"
+            android:name=".PedidoPackage.CadastrarPedido"
             android:label="@string/title_activity_maps2" />
         <activity
-            android:name=".CadastroViagem"
+            android:name=".ViagemPackage.CadastroViagem"
             android:label="@string/title_activity_cadastro_viagem" />
     </application>
 
